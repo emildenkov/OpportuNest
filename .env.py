@@ -1,0 +1,6 @@
+SECRET_KEY='django-insecure-5-v)v-gytargmfl2*of&b(v*ap3sya)nm++f9e5c_u)d%2@x3x'
+DB_NAME='opportunest'
+DB_USER='postgres-user'
+DB_PASSWORD='password'
+DB_HOST='127.0.0.1'
+DB_PORT='5432'
