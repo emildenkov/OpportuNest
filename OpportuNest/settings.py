@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'OpportuNest.user.apps.UserConfig',
+    'OpportuNest.accounts.apps.AccountsConfig',
     'OpportuNest.job.apps.JobConfig',
     'OpportuNest.application.apps.ApplicationConfig',
     'OpportuNest.company_profile.apps.CompanyProfileConfig',
@@ -88,6 +88,10 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'OpportuNest.accounts.authentication.EmailOrUsernameModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -139,3 +143,4 @@ cloudinary.config(
 
 MEDIA_URL = 'media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+AUTH_USER_MODEL = 'accounts.User'

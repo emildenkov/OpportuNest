@@ -1,3 +1,35 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
+from OpportuNest.application.validators import PDFValidator
 
-# Create your models here.
+
+class Application(models.Model):
+    job = models.ForeignKey(
+        to='job.Job',
+        on_delete=models.CASCADE,
+        related_name='job_applications',
+    )
+    applicant = models.ForeignKey(
+        to='job_seeker_profile.JobSeekerProfile',
+        on_delete=models.CASCADE,
+        related_name='applications',
+    )
+    resume = CloudinaryField(
+        'file',
+        resource_type='raw',
+        folder='applications/resumes',
+        validators=[
+            PDFValidator()
+        ]
+    )
+    cover_letter = models.TextField(
+        blank=True,
+        null=True,
+    )
+    date_applied = models.DateTimeField(
+        auto_now_add=True,
+    )
+    status = models.TextField(
+        blank=True,
+        null=True,
+    )
