@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'OpportuNest.skill.apps.SkillConfig',
 
     'cloudinary',
-    'cloudinary_storage'
+    'cloudinary_storage',
+
+    'OpportuNest.common.apps.CommonConfig'
+
 ]
 
 MIDDLEWARE = [

@@ -1,22 +1,14 @@
-"""
-URL configuration for OpportuNest project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('OpportuNest.common.urls')),
+    path('accounts/', include('OpportuNest.accounts.urls')),
+    path('application/', include('OpportuNest.application.urls')),
+    path('company_profile/', include('OpportuNest.company_profile.urls')),
+    path('job/', include('OpportuNest.job.urls')),
+    path('job_seeker/', include('OpportuNest.job_seeker_profile.urls')),
+    path('review', include('OpportuNest.review.urls')),
+    path('skill/', include('OpportuNest.skill.urls')),
 ]
