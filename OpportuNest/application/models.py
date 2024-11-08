@@ -10,7 +10,7 @@ class Application(models.Model):
         related_name='job_applications',
     )
     applicant = models.ForeignKey(
-        to='job_seeker_profile.JobSeekerProfile',
+        to='accounts.AppUser',
         on_delete=models.CASCADE,
         related_name='applications',
     )

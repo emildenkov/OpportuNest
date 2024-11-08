@@ -33,8 +33,6 @@ INSTALLED_APPS = [
     'OpportuNest.accounts.apps.AccountsConfig',
     'OpportuNest.job.apps.JobConfig',
     'OpportuNest.application.apps.ApplicationConfig',
-    'OpportuNest.company_profile.apps.CompanyProfileConfig',
-    'OpportuNest.job_seeker_profile.apps.JobSeekerProfileConfig',
     'OpportuNest.review.apps.ReviewConfig',
     'OpportuNest.skill.apps.SkillConfig',
 
@@ -146,4 +144,4 @@ cloudinary.config(
 
 MEDIA_URL = 'media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.AppUser'

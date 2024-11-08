@@ -26,7 +26,7 @@ class Job(models.Model):
         blank=False,
     )
     posted_by = models.ForeignKey(
-        to='company_profile.CompanyProfile',
+        to='accounts.AppUser',
         on_delete=models.CASCADE,
         related_name='jobs',
     )

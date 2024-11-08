@@ -6,12 +6,12 @@ from OpportuNest.review.authentication import get_deleted_user
 
 class Review(models.Model):
     company = models.ForeignKey(
-        to='company_profile.CompanyProfile',
+        to='accounts.Company',
         on_delete=models.CASCADE,
         related_name='company_reviews'
     )
     reviewer = models.ForeignKey(
-        to='accounts.User',
+        to='accounts.AppUser',
         on_delete= models.SET(get_deleted_user),
         related_name='reviews'
     )
