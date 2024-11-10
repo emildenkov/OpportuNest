@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load placeholder_setter %}
+
+{% block content %}
+    <h1>Register Company Profile</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+    
+        {{ form.email|placeholder_setter:'Email' }}
+        {{ form.email.errors }}
+    
+        {{ form.company_name|placeholder_setter:'Company name' }}
+        {{ form.company_name.errors }}
+    
+        {{ form.password1|placeholder_setter:'Password' }}
+        {{ form.password1.errors }}
+
+        {{ form.password2|placeholder_setter:'Confirm Password' }}
+        {{ form.password2.errors }}
+    
+        <button type="submit">Register</button>
+    </form>
+    
+{% endblock %}

@@ -90,7 +90,6 @@ DATABASES = {
 }
 
 AUTHENTICATION_BACKENDS = [
-    'OpportuNest.accounts.authentication.EmailOrUsernameModelBackend'
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -145,3 +144,5 @@ cloudinary.config(
 MEDIA_URL = 'media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 AUTH_USER_MODEL = 'accounts.AppUser'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load placeholder_setter %}
+
+{% block content %}
+    
+    <h1>Log In to OpportuNest</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.errors }}
+        {{ form.username|placeholder_setter:'Email' }}
+        {{ form.password|placeholder_setter:'Password' }}
+    
+        <button class="btn btn-primary" type="submit">Log in</button>
+    </form>
+    
+    <p>Don't have an account? <a href="{% url 'account_select_type' %}">Register</a></p>
+    
+{% endblock %}

@@ -8,7 +8,9 @@ from OpportuNest.accounts.managers import AppUserManager
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
-        unique=True
+        unique=True,
+        null=False,
+        blank=False,
     )
 
     is_active = models.BooleanField(
@@ -40,11 +42,12 @@ class Company(models.Model):
     logo = CloudinaryField(
         'logo',
         default=config('DEFAULT_COMPANY_IMAGE'),
+        null=True,
+        blank=True,
     )
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
-        primary_key=True,
     )
 
 
@@ -72,12 +75,10 @@ class Seeker(models.Model):
     )
     skills = models.ManyToManyField(
         to='skill.Skill'
-
     )
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
-        primary_key=True,
     )
 
     def full_name(self):
