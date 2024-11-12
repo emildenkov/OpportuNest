@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow-lg" style="max-width: 50%;">
+        <div class="card-header text-center bg-primary text-white">
+            <h2>Seeker Profile</h2>
+        </div>
+        <div class="card-body">
+            <div class="text-center mb-4">
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 150px;">
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Full Name:</strong> {{ profile.full_name }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Date of Birth:</strong> {{ profile.date_of_birth }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Skills:</strong>
+                    <ul class="mb-0">
+                        {% for skill in profile.skills.all %}
+                            <li>{{ skill.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer text-center">
+            <a href="#" class="btn btn-success me-2">Edit</a>
+            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this profile?');">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

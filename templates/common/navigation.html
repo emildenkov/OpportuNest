@@ -1,23 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">OpportuNest</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Brand Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+            <i class="fa fa-home me-2"></i>OpportuNest
+        </a>
+
+        <!-- Toggler for Mobile View -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 {% if not request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">
-                            <i>Log In</i>
+                    <!-- Log In Link -->
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-white d-flex align-items-center" href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt me-1"></i><span>Log In</span>
                         </a>
                     </li>
                 {% else %}
-                    <form class="nav-item" method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button class="button" type="submit"><i>Logout</i></button>
-                    </form>
+                    <!-- Logout Button -->
+                    <li class="nav-item d-flex align-items-center">
+                        <form class="d-flex align-items-center" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class="nav-link btn btn-link text-white p-0 d-flex align-items-center" type="submit">
+                                <i class="fas fa-sign-out-alt me-1"></i><span>Logout</span>
+                            </button>
+                        </form>
+                    </li>
+                    <!-- Profile Link -->
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-white d-flex align-items-center" href="{% url 'profile-details' request.user.pk %}">
+                            <i class="fas fa-user me-1"></i><span>Profile</span>
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

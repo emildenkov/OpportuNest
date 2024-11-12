@@ -27,7 +27,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     objects = AppUserManager()
 
 
-
 class Company(models.Model):
     company_name = models.CharField(
         max_length=100,

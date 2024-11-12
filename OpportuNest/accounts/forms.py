@@ -70,3 +70,15 @@ class AccountTypeSelectionForm(forms.Form):
         widget=forms.RadioSelect,
         label='Select Account Type',
     )
+
+
+class CompanyEditForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        exclude = ('user',)
+
+
+class SeekerEditForm(forms.ModelForm):
+    class Meta:
+        model = Seeker
+        exclude = ('user',)
