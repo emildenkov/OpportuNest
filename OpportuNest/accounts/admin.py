@@ -1,3 +1,9 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
-# Register your models here.
+from OpportuNest.accounts.models import AppUser
+
+
+@admin.register(AppUser)
+class AppUserAdmin(ModelAdmin):
+    pass
