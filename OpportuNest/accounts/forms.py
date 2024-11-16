@@ -1,9 +1,11 @@
+from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
 from OpportuNest.accounts.choices import UserChoices
 from OpportuNest.accounts.models import Company, Seeker
+from OpportuNest.skill.models import Skill
 
 UserModel = get_user_model()
 
@@ -75,10 +77,17 @@ class AccountTypeSelectionForm(forms.Form):
 class CompanyEditForm(forms.ModelForm):
     class Meta:
         model = Company
-        exclude = ('user',)
+        fields = ('company_name', 'description', 'logo')
 
 
 class SeekerEditForm(forms.ModelForm):
+
+    skills = forms.ModelMultipleChoiceField(
+        queryset=Skill.objects.all().order_by('name'),
+        widget=forms.SelectMultiple(attrs={'class': 'select2'}),
+        required=False,
+    )
+
     class Meta:
         model = Seeker
-        exclude = ('user',)
+        fields = ['first_name', 'last_name', 'profile_picture', 'date_of_birth', 'skills']

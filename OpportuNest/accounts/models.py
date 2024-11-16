@@ -73,7 +73,9 @@ class Seeker(models.Model):
         blank=True,
     )
     skills = models.ManyToManyField(
-        to='skill.Skill'
+        to='skill.Skill',
+        blank=True,
+        null=True,
     )
     user = models.OneToOneField(
         AppUser,

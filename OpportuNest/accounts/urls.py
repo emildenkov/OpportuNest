@@ -11,5 +11,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('<int:pk>/', include([
         path('details/', views.ProfileDetailView.as_view(), name='profile-details'),
+        path('edit-seeker/', views.EditSeekerView.as_view(), name='edit-seeker'),
+        path('edit-company/', views.EditCompanyView.as_view(), name='edit-company'),
     ]))
 ]

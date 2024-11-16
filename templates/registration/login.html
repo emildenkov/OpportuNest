@@ -2,19 +2,49 @@
 {% load placeholder_setter %}
 
 {% block content %}
-    
-    <h1>Log In to OpportuNest</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-        
-        {{ form.errors }}
-        {{ form.username|placeholder_setter:'Email' }}
-        {{ form.password|placeholder_setter:'Password' }}
-    
-        <button class="btn btn-primary" type="submit">Log in</button>
-    </form>
-    
-    <p>Don't have an account? <a href="{% url 'account-select-type' %}">Register</a></p>
-    
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card w-50 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Log In to OpportuNest</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <!-- Display form-level errors, if any -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Username Field -->
+                    <div class="mb-3">
+                        {{ form.username|placeholder_setter:'Email' }}
+                        {% if form.username.errors %}
+                            <div class="text-danger small">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        {{ form.password|placeholder_setter:'Password' }}
+                        {% if form.password.errors %}
+                            <div class="text-danger small">
+                                {{ form.password.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">Log in</button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p class="mb-0">Don't have an account? <a href="{% url 'account-select-type' %}">Register</a></p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
