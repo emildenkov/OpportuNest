@@ -1,9 +1,9 @@
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from OpportuNest.accounts.forms import AccountTypeSelectionForm, CompanyCreationForm, SeekerCreationForm, \
     SeekerEditForm, CompanyEditForm
 from OpportuNest.accounts.models import Company, Seeker
@@ -122,3 +122,24 @@ class EditCompanyView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         user_id = self.kwargs.get('pk')
         return Company.objects.get(user_id=user_id)
+
+
+class DeleteCompanyView(LoginRequiredMixin, DeleteView):
+    model = Company
+    template_name = 'registration/delete-account.html'
+    success_url = reverse_lazy('index')
+
+
+    def get_object(self, queryset=None):
+        user_id = self.kwargs.get('pk')
+        return Company.objects.get(user_id=user_id)
+
+class DeleteSeekerView(LoginRequiredMixin, DeleteView):
+    model = Seeker
+    template_name = 'registration/delete-account.html'
+    success_url = reverse_lazy('index')
+
+
+    def get_object(self, queryset=None):
+        user_id = self.kwargs.get('pk')
+        return Seeker.objects.get(user_id=user_id)

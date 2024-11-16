@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body text-center">
+            <h1 class="mb-4">Confirm Profile Deletion</h1>
+            <p class="lead text-danger">
+                You are about to delete your profile. This action cannot be undone. Are you sure you want to proceed?
+            </p>
+            <div class="d-flex justify-content-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-lg me-3">Yes, Delete</button>
+                    <a href="{% url 'profile-details' request.user.pk %}" class="btn btn-secondary btn-lg">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -13,5 +13,7 @@ urlpatterns = [
         path('details/', views.ProfileDetailView.as_view(), name='profile-details'),
         path('edit-seeker/', views.EditSeekerView.as_view(), name='edit-seeker'),
         path('edit-company/', views.EditCompanyView.as_view(), name='edit-company'),
+        path('delete-company/', views.DeleteCompanyView.as_view(), name='delete-company'),
+        path('delete-seeker/', views.DeleteSeekerView.as_view(), name='delete-seeker'),
     ]))
 ]
