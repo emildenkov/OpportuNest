@@ -1,6 +1,7 @@
 from django import forms
 
 from OpportuNest.job.models import Job
+from OpportuNest.mixins import ReadOnlyMixin
 
 
 class AddJobForm(forms.ModelForm):
@@ -26,3 +27,12 @@ class AddJobForm(forms.ModelForm):
             }
         }
 
+
+class EditJobForm(AddJobForm):
+    pass
+
+
+class DeleteJobForm(ReadOnlyMixin, forms.ModelForm):
+    class Meta:
+        model = Job
+        exclude = ['posted_by', 'date_posted']
