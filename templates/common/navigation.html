@@ -15,14 +15,20 @@
             <ul class="navbar-nav ms-auto">
                 {% if not request.user.is_authenticated %}
                     <!-- Log In Link -->
-                    <li class="nav-item d-flex align-items-center">
+                    <li class="nav-item d-flex align-items-center mx-3">
                         <a class="nav-link text-white d-flex align-items-center" href="{% url 'login' %}">
                             <i class="fas fa-sign-in-alt me-1"></i><span>Log In</span>
                         </a>
                     </li>
                 {% else %}
-                    <!-- Logout Button -->
-                    <li class="nav-item d-flex align-items-center">
+                    
+                    <li class="nav-item d-flex align-items-center mx-2">
+                        <a class="nav-link text-white d-flex align-items-center" href="{% url 'job-list' %}">
+                            <i class="fa-solid fa-briefcase me-1"></i><span>Jobs</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item d-flex align-items-center mx-2">
                         <form class="d-flex align-items-center" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <button class="nav-link btn btn-link text-white p-0 d-flex align-items-center" type="submit">
@@ -30,12 +36,13 @@
                             </button>
                         </form>
                     </li>
-                    <!-- Profile Link -->
-                    <li class="nav-item d-flex align-items-center">
+
+                    <li class="nav-item d-flex align-items-center mx-2">
                         <a class="nav-link text-white d-flex align-items-center" href="{% url 'profile-details' request.user.pk %}">
                             <i class="fas fa-user me-1"></i><span>Profile</span>
                         </a>
                     </li>
+                    
                 {% endif %}
             </ul>
         </div>

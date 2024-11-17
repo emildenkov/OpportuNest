@@ -20,11 +20,6 @@ class Job(models.Model):
         null=False,
         blank=False,
     )
-    company = models.CharField(
-        max_length=100,
-        null=False,
-        blank=False,
-    )
     posted_by = models.ForeignKey(
         to='accounts.AppUser',
         on_delete=models.CASCADE,

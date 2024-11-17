@@ -21,6 +21,14 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         default=False
     )
 
+    @property
+    def is_company(self):
+        return hasattr(self, 'company')
+
+    @property
+    def is_seeker(self):
+        return hasattr(self, 'seeker')
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -49,6 +57,9 @@ class Company(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return self.company_name
+
 
 class Seeker(models.Model):
 
@@ -74,13 +85,16 @@ class Seeker(models.Model):
     )
     skills = models.ManyToManyField(
         to='skill.Skill',
-        blank=True,
-        null=True,
     )
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
     )
 
+
     def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
+
+    def __str__(self):
         return f'{self.first_name} {self.last_name}'
