@@ -2,12 +2,14 @@
 
 {% block content %}
     <div class="container mt-4">
-
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'add-job' %}" class="btn btn-success">
-            <i class="fas fa-plus me-1"></i> Add New Job
-        </a>
-    </div>
+    
+    {% if request.user.is_company or request.user.is_staff %}
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{% url 'add-job' %}" class="btn btn-success">
+                <i class="fas fa-plus me-1"></i> Add New Job
+            </a>
+        </div>
+    {% endif %}
     
     <h2 class="mb-4">Available Jobs</h2>
     <div class="list-group">
@@ -23,9 +25,11 @@
                         <a href="{% url 'job-details' job.pk %}" class="btn btn-primary">
                             <i class="fas fa-info-circle me-1"></i> Details
                         </a>
-                        <a href="#" class="btn btn-outline-primary">
-                            <i class="fas fa-paper-plane me-1"></i> Apply
-                        </a>
+                        {% if request.user.is_seeker %}
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-paper-plane me-1"></i> Apply
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

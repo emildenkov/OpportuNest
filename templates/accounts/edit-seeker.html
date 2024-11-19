@@ -1,25 +1,40 @@
 {% extends 'base.html' %}
+{% load add_class %}
 
 {% block content %}
     <div class="container mt-5 d-flex justify-content-center">
         <div class="w-75 shadow-lg p-4 rounded">
             <h3 class="text-center mb-4">Edit Seeker Profile</h3>
             
-            <form method="post" enctype="multipart/form-data" class="needs-validation">
+            <form method="post" enctype="multipart/form-data" novalidate class="needs-validation">
                 {% csrf_token %}
-
-                {% if form.errors %}
+            
+                {% if form.non_field_errors %}
                     <div class="alert alert-danger">
-                        {{ form.errors }}
+                        {{ form.non_field_errors }}
                     </div>
                 {% endif %}
             
-                <div class="mb-3">
-                    {{ form.as_p }}
-                </div>
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {% if field.name == 'skills' %}
+                            {{ field|add_class:"form-control select2" }}
+                        {% else %}
+                            {{ field|add_class:"form-control" }}
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ field.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary btn-lg w-50">Save Changes</button>
+                    <button type="submit" class="btn btn-primary btn-lg w-50">
+                        <i class="fas fa-save me-1"></i> Save Changes
+                    </button>
                 </div>
             </form>
         </div>
@@ -37,5 +52,4 @@
             });
         });
     </script>
-    
 {% endblock %}

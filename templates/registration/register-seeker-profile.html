@@ -1,29 +1,55 @@
 {% extends 'base.html' %}
-{% load placeholder_setter %}
+{% load add_class placeholder_setter %}
 
 {% block content %}
-
-    <h1>Register Seeker Profile</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-    
-        {{ form.email|placeholder_setter:'Email' }}
-        {{ form.email.errors }}
-    
-        {{ form.first_name|placeholder_setter:'First Name' }}
-        {{ form.first_name.errors }}
-        
-        {{ form.last_name|placeholder_setter:'Last Name' }}
-        {{ form.last_name.errors }}
-    
-        {{ form.password1|placeholder_setter:'Password' }}
-        {{ form.password1.errors }}
-
-        {{ form.password2|placeholder_setter:'Confirm Password' }}
-        {{ form.password2.errors }}
-    
-        <button type="submit">Register</button>
-    </form>
-    
+<div class="container mt-5">
+    <div class="card shadow-sm mx-auto" style="max-width: 500px;">
+        <div class="card-body">
+            <h1 class="text-center mb-4">Register Seeker Profile</h1>
+            
+            <form method="post" novalidate class="needs-validation">
+                {% csrf_token %}
+            
+                <div class="mb-3">
+                    {{ form.email|placeholder_setter:'Email'|add_class:"form-control" }}
+                    {% if form.email.errors %}
+                        <div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            
+                <div class="mb-3">
+                    {{ form.first_name|placeholder_setter:'First Name'|add_class:"form-control" }}
+                    {% if form.first_name.errors %}
+                        <div class="invalid-feedback d-block">{{ form.first_name.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            
+                <div class="mb-3">
+                    {{ form.last_name|placeholder_setter:'Last Name'|add_class:"form-control" }}
+                    {% if form.last_name.errors %}
+                        <div class="invalid-feedback d-block">{{ form.last_name.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            
+                <div class="mb-3">
+                    {{ form.password1|placeholder_setter:'Password'|add_class:"form-control" }}
+                    {% if form.password1.errors %}
+                        <div class="invalid-feedback d-block">{{ form.password1.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            
+                <div class="mb-3">
+                    {{ form.password2|placeholder_setter:'Confirm Password'|add_class:"form-control" }}
+                    {% if form.password2.errors %}
+                        <div class="invalid-feedback d-block">{{ form.password2.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-user-plus me-1"></i> Register
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

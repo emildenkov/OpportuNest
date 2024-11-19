@@ -3,30 +3,35 @@
 {% block content %}
     <!-- Header Section -->
     <header class="text-center bg-light py-5">
-        <h1>Welcome to OpportuNest</h1>
-        <p>Find your next opportunity</p>
+        <h1 class="display-4">Welcome to OpportuNest</h1>
+        <p class="lead">Find your next opportunity</p>
     </header>
     
     <!-- Search Bar Section -->
-    <section class="search-bar text-center py-4">
+    <section class="search-bar py-5">
         <div class="container">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search for jobs, titles, or keywords">
-                <button class="btn btn-primary" type="button">Search</button>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" class="form-control rounded-start" placeholder="Search for jobs, titles, or keywords" aria-label="Job Search" aria-describedby="search-button">
+                        <button class="btn btn-primary rounded-end" id="search-button" type="button">
+                            <i class="fas fa-search me-1"></i> Search
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     
     <!-- Information Section -->
-    <section class="site-info py-4">
+    <section class="site-info py-5">
         <div class="container">
             <h2 class="text-center">About Our Job Portal</h2>
-            <p class="text-center mt-3">
-                Our Job Portal is designed to connect talented job seekers with top employers around the world. Whether you
-                are looking for full-time positions, freelance opportunities, or internships, our platform offers a wide
-                variety of job listings across various industries. With easy search tools and a user-friendly interface,
-                finding your dream job has never been easier. Join us today and take the next step toward achieving your
-                career goals.
+            <p class="text-center mt-3 fs-5">
+                OpportuNest is designed to connect talented job seekers with top employers worldwide. Whether you're 
+                looking for full-time positions, freelance opportunities, or internships, our platform offers a wide 
+                variety of job listings across industries. With powerful search tools and a user-friendly interface, 
+                finding your dream job has never been easier. Join us today and take the next step toward your career goals.
             </p>
         </div>
     </section>

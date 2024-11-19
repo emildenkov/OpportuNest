@@ -1,20 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <!-- Brand Logo -->
         <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
             <i class="fa fa-home me-2"></i>OpportuNest
         </a>
-
-        <!-- Toggler for Mobile View -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar Links -->
+    
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 {% if not request.user.is_authenticated %}
-                    <!-- Log In Link -->
+                    
                     <li class="nav-item d-flex align-items-center mx-3">
                         <a class="nav-link text-white d-flex align-items-center" href="{% url 'login' %}">
                             <i class="fas fa-sign-in-alt me-1"></i><span>Log In</span>
@@ -47,4 +40,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> 

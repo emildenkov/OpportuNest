@@ -7,22 +7,29 @@
             <h2>Company Profile</h2>
         </div>
         <div class="card-body">
-            <div class="text-center mb-4">
-                <img src="{{ profile.logo.url }}" alt="Company Logo" class="img-fluid rounded" style="max-width: 200px;">
-            </div>
+            {% if profile.logo %}
+                <div class="text-center mb-4">
+                    <img src="{{ profile.logo.url }}" alt="Company Logo" class="img-fluid rounded" style="max-width: 200px;">
+                </div>
+            {% endif %}
+        
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <strong>Company Name:</strong> {{ profile.company_name }}
                 </li>
                 <li class="list-group-item">
                     <strong>Description:</strong>
-                    <p class="mb-0">{{ profile.description }}</p>
+                    <p class="mb-0">{{ profile.description|default:"No description available." }}</p>
                 </li>
             </ul>
         </div>
         <div class="card-footer text-center">
-            <a href="{% url 'edit-company' request.user.pk %}" class="btn btn-success me-2">Edit</a>
-            <a href="{% url 'delete-company' request.user.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'edit-company' request.user.pk %}" class="btn btn-success me-2">
+                <i class="fas fa-edit me-1"></i> Edit
+            </a>
+            <a href="{% url 'delete-company' request.user.pk %}" class="btn btn-danger">
+                <i class="fas fa-trash-alt me-1"></i> Delete
+            </a>
         </div>
     </div>
 </div>
