@@ -20,16 +20,22 @@ class Application(models.Model):
         folder='applications/resumes',
         validators=[
             PDFValidator()
-        ]
+        ],
+        null=False,
+        blank=False,
     )
     cover_letter = models.TextField(
-        blank=True,
+        blank=False,
+        null=False,
+    )
+    status = models.CharField(
+        max_length=10,
         null=True,
+        blank=True,
     )
     date_applied = models.DateTimeField(
         auto_now_add=True,
     )
-    status = models.TextField(
-        blank=True,
-        null=True,
-    )
+
+    def __str__(self):
+        return f"Application from {self.applicant} for {self.job.title}"

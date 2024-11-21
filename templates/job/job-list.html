@@ -26,7 +26,7 @@
                             <i class="fas fa-info-circle me-1"></i> Details
                         </a>
                         {% if request.user.is_seeker %}
-                            <a href="#" class="btn btn-outline-primary">
+                            <a href="{% url 'create-application' job.pk %}" class="btn btn-outline-primary">
                                 <i class="fas fa-paper-plane me-1"></i> Apply
                             </a>
                         {% endif %}

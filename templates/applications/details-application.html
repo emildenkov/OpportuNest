@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="card p-4 shadow-sm">
+            <h2 class="card-title">Application Details</h2>
+            <p class="text-muted">Applied by: {{ applicant_email }}</p>
+            <p class="text-muted">Date Applied: {{ application.date_applied|date:"d M Y H:i" }}</p>
+
+            <hr>
+
+            <h4>Job Information</h4>
+            <p><strong>Title:</strong> {{ application.job.title }}</p>
+            <p><strong>Company:</strong> {{ company_name }}</p>
+            <p><strong>Location:</strong> {{ application.job.location }}</p>
+
+            <hr>
+
+            <h4>Resume</h4>
+            <a href="{{ application.resume.url }}" target="_blank" class="btn btn-primary">
+                <i class="fas fa-file-pdf me-1"></i> View Resume
+            </a>
+
+            <hr>
+
+            <h4>Cover Letter</h4>
+            <p>{{ application.cover_letter }}</p>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'profile-details' request.user.pk %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Profile
+                </a>
+                {% if request.user.is_company and application.status is None %}
+                    <a href="{% url 'accept-application' application.pk %}" class="btn btn-success btn-sm">
+                        <i class="fas fa-check me-1"></i> Accept
+                    </a>
+                    <a href="{% url 'reject-application' application.pk %}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-times me-1"></i> Reject
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

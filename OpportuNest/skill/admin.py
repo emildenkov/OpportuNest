@@ -1,3 +1,9 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
-# Register your models here.
+from OpportuNest.skill.models import Skill
+
+
+@admin.register(Skill)
+class SkillAdmin(admin.ModelAdmin):
+    pass

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load add_class %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Job Application</h1>
+
+    <form method="post" enctype="multipart/form-data" novalidate class="needs-validation">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="id_resume" class="form-label">Resume:</label>
+            {{ form.resume|add_class:"form-control" }}
+            {% if form.resume.errors %}
+                <div class="invalid-feedback d-block">{{ form.resume.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.cover_letter.label_tag }}
+            {{ form.cover_letter|add_class:"form-control" }}
+            {% if form.cover_letter.errors %}
+                <div class="invalid-feedback d-block">{{ form.cover_letter.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <a href="{% url 'job-list' %}" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left me-1"></i> Cancel
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-paper-plane me-1"></i> Submit Application
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

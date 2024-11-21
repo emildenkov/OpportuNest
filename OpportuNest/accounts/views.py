@@ -7,6 +7,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from OpportuNest.accounts.forms import AccountTypeSelectionForm, CompanyCreationForm, SeekerCreationForm, \
     SeekerEditForm, CompanyEditForm
 from OpportuNest.accounts.models import Company, Seeker
+from OpportuNest.application.models import Application
 
 
 class AccountSelectView(View):
@@ -87,6 +88,16 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         elif hasattr(user, 'seeker'):
             return user.seeker
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        if user.is_seeker:
+            context['applications'] = user.applications.all()
+        elif user.is_company:
+            context['applications'] = Application.objects.filter(job__posted_by=user)
+
+        return context
 
 class EditSeekerView(LoginRequiredMixin, UpdateView):
     model = Seeker

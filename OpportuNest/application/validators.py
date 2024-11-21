@@ -21,5 +21,13 @@ class PDFValidator:
 
 
     def __call__(self, value):
-        if not value.name.endswith('.pdf'):
-            raise ValidationError(self.__message)
+        try:
+            file_name = value.name
+        except AttributeError:
+            try:
+                file_name = value.public_id
+            except AttributeError:
+                raise ValidationError('Invalid file format or resource type!')
+
+        if not file_name.endswith('.pdf'):
+            raise ValidationError(self.message)
