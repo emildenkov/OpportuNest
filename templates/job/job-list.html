@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container mt-4">
+<div class="container mt-4">
     
     {% if request.user.is_company or request.user.is_staff %}
         <div class="d-flex justify-content-end mb-3">
@@ -11,14 +11,25 @@
         </div>
     {% endif %}
     
-    <h2 class="mb-4">Available Jobs</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center">
+            <h2 class="me-3">Available Jobs</h2>
+            <form method="get" action="" id="search-form" class="d-flex">
+                {{ form }}
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    
     <div class="list-group">
         {% if job_list %}
             {% for job in job_list %}
                 <div class="list-group-item mb-3 p-4 shadow-sm">
                     <h4>{{ job.title }}</h4>
                     <p><strong>Requirements:</strong> {{ job.requirements|truncatechars:25 }}</p>
-                    <p><strong>Posted by:</strong> {{ job.posted_by.company.company_name }}</p>
+                    <p><strong>Posted by:</strong> {{ company_name }}</p>
                     <p><strong>Date Posted:</strong> {{ job.date_posted|date:"d M Y H:i" }}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
@@ -78,4 +89,5 @@
         </ul>
     </nav>
 </div>
+    
 {% endblock %}

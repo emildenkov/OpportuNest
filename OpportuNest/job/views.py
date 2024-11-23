@@ -1,20 +1,28 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
 
-from OpportuNest.job.forms import AddJobForm, EditJobForm, DeleteJobForm
+from OpportuNest.job.forms import AddJobForm, EditJobForm, DeleteJobForm, SearchJobForm
 from OpportuNest.job.models import Job
 
 
-class JobListView(LoginRequiredMixin, ListView):
+class JobListView(LoginRequiredMixin, ListView, FormView):
     model = Job
     template_name = 'job/job-list.html'
     context_object_name = 'job_list'
     paginate_by = 5
+    form_class = SearchJobForm
 
     def get_queryset(self):
-        return Job.objects.select_related('posted_by__company')
+        queryset = self.model.objects.select_related('posted_by__company')
+
+        query = self.request.GET.get('query', None)
+        if query:
+            queryset = queryset.filter(title__icontains=query)
+
+        return queryset
+
 
 class AddJobView(LoginRequiredMixin, CreateView):
     model = Job

@@ -1,5 +1,8 @@
+import requests
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -59,3 +62,31 @@ def reject_application(request, pk):
         application.status = 'Rejected'
         application.save()
         return redirect('profile-details', pk=request.user.pk)
+
+
+@login_required
+def download_resume(request, pk):      #TODO: fix this view!!!
+    try:
+        application = get_object_or_404(Application, pk=pk)
+
+        if not(request.user.is_staff or request.user == application.job.posted_by):
+            raise PermissionDenied("You are not allowed to download this resume")
+
+        resume_url = application.resume.url
+        response = requests.get(resume_url)
+
+        if response.status_code != 200:
+            raise Http404('Resume not found')
+
+        filename = resume_url.split('/')[-1].split('?')[0]
+
+        response_content = HttpResponse(
+            response.content,
+            content_type='application/pdf',
+        )
+
+        response_content['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response_content
+
+    except Application.DoesNotExist:
+        raise Http404('Application not found')

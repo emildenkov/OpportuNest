@@ -36,3 +36,16 @@ class DeleteJobForm(ReadOnlyMixin, forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['posted_by', 'date_posted']
+
+
+class SearchJobForm(forms.Form):
+    query = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Search for a job',
+            }
+        ),
+        label='',
+        required=False,
+        max_length=15
+    )

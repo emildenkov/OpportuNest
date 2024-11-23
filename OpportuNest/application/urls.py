@@ -10,5 +10,6 @@ urlpatterns = [
         path('details-application/', views.DetailApplicationView.as_view(), name='details-application'),
         path('accept-application/', views.accept_application, name='accept-application'),
         path('reject-application/', views.reject_application, name='reject-application'),
+        path('download-resume/', views.download_resume, name='download-resume'),
     ]))
 ]
