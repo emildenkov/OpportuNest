@@ -48,7 +48,6 @@ class Company(models.Model):
     )
     logo = CloudinaryField(
         'logo',
-        default=config('DEFAULT_COMPANY_IMAGE'),
         null=True,
         blank=True,
     )
@@ -75,7 +74,6 @@ class Seeker(models.Model):
     )
     profile_picture = CloudinaryField(
         'profile_picture',
-        default = config('DEFAULT_PROFILE_IMAGE'),
         null=True,
         blank=True
     )

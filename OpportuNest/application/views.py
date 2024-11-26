@@ -1,8 +1,13 @@
-import requests
+import os
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.http import Http404, HttpResponse
+from django.http import Http404
+
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -65,28 +70,31 @@ def reject_application(request, pk):
 
 
 @login_required
-def download_resume(request, pk):      #TODO: fix this view!!!
+def view_resume(request, pk):
+    application = get_object_or_404(Application, pk=pk)
+
+    if not (request.user.is_staff or request.user == application.job.posted_by):
+        raise PermissionDenied("You are not allowed to view this resume")
+
+    resume_resource = application.resume
+
+    public_id = resume_resource.public_id
+    file_format = resume_resource.format
+    resource_type = 'raw'
+
     try:
-        application = get_object_or_404(Application, pk=pk)
-
-        if not(request.user.is_staff or request.user == application.job.posted_by):
-            raise PermissionDenied("You are not allowed to download this resume")
-
-        resume_url = application.resume.url
-        response = requests.get(resume_url)
-
-        if response.status_code != 200:
-            raise Http404('Resume not found')
-
-        filename = resume_url.split('/')[-1].split('?')[0]
-
-        response_content = HttpResponse(
-            response.content,
-            content_type='application/pdf',
+        resume_url, _ = cloudinary.utils.cloudinary_url(
+            public_id,
+            resource_type=resource_type,
+            format=file_format,
+            secure=True,
+            sign_url=True
         )
 
-        response_content['Content-Disposition'] = f'attachment; filename="{filename}"'
-        return response_content
+        print(f"Generated URL: {resume_url}")
 
-    except Application.DoesNotExist:
-        raise Http404('Application not found')
+        return redirect(resume_url)
+
+    except Exception as e:
+        print(f"Error generating resume URL: {e}")
+        raise Http404('Resume not found')
