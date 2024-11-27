@@ -2,6 +2,7 @@ from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import path, include
 
 from OpportuNest.accounts import views
+from OpportuNest.accounts.views import delete_seeker_view
 
 urlpatterns = [
     path('select-account-type/', views.AccountSelectView.as_view(), name='account-select-type'),
@@ -14,6 +15,6 @@ urlpatterns = [
         path('edit-seeker/', views.EditSeekerView.as_view(), name='edit-seeker'),
         path('edit-company/', views.EditCompanyView.as_view(), name='edit-company'),
         path('delete-company/', views.DeleteCompanyView.as_view(), name='delete-company'),
-        path('delete-seeker/', views.DeleteSeekerView.as_view(), name='delete-seeker'),
+        path('delete-seeker/', delete_seeker_view, name='delete-seeker'),
     ]))
 ]

@@ -1,4 +1,5 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -135,22 +136,35 @@ class EditCompanyView(LoginRequiredMixin, UpdateView):
         return Company.objects.get(user_id=user_id)
 
 
-class DeleteCompanyView(LoginRequiredMixin, DeleteView):
-    model = Company
-    template_name = 'registration/delete-account.html'
-    success_url = reverse_lazy('index')
+def delete_company_view(request, pk):
+    company = get_object_or_404(Company, user_id=pk)
 
+    if request.method == 'POST':
+        user = company.user
+        company.delete()
+        user.delete()
 
-    def get_object(self, queryset=None):
-        user_id = self.kwargs.get('pk')
-        return Company.objects.get(user_id=user_id)
+        return redirect('index')
 
-class DeleteSeekerView(LoginRequiredMixin, DeleteView):
-    model = Seeker
-    template_name = 'registration/delete-account.html'
-    success_url = reverse_lazy('index')
+    context = {
+        'company': company,
+    }
 
+    return render(request, 'registration/delete-account.html', context)
 
-    def get_object(self, queryset=None):
-        user_id = self.kwargs.get('pk')
-        return Seeker.objects.get(user_id=user_id)
+@login_required
+def delete_seeker_view(request, pk):
+    seeker = get_object_or_404(Seeker, user_id=pk)
+
+    if request.method == "POST":
+        user = seeker.user
+        seeker.delete()
+        user.delete()
+
+        return redirect(reverse_lazy('index'))
+
+    context = {
+        'seeker': seeker,
+    }
+
+    return render(request, 'registration/delete-account.html', context)

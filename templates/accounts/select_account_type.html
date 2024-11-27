@@ -16,19 +16,19 @@
                             {{ form.non_field_errors }}
                         </div>
                     {% endif %}
-                
-                    {% for field in form %}
-                        <div class="mb-3">
-                            {{ field.label_tag }}
-                            {{ field|add_class:"form-control" }}
-                            {% if field.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ field.errors.0 }}
-                                </div>
-                            {% endif %}
+
+                    <div class="mb-3">
+                        {{ form.account_type.label_tag }}
+                        <div>
+                            {{ form.account_type }}
                         </div>
-                    {% endfor %}
-                
+                        {% if form.account_type.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.account_type.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100">
                         <i class="fas fa-arrow-right me-1"></i> Continue
                     </button>
