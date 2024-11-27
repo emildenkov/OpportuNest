@@ -135,7 +135,7 @@ class EditCompanyView(LoginRequiredMixin, UpdateView):
         user_id = self.kwargs.get('pk')
         return Company.objects.get(user_id=user_id)
 
-
+@login_required
 def delete_company_view(request, pk):
     company = get_object_or_404(Company, user_id=pk)
 
