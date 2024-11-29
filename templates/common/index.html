@@ -1,21 +1,84 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-
+    <!-- Landing Page Header -->
     <header class="text-center bg-light py-5">
         <h1 class="display-4">Welcome to OpportuNest</h1>
-        <p class="lead">Find your next opportunity</p>
+        <p class="lead">Find Your Next Opportunity</p>
     </header>
 
-    <section class="site-info py-5">
+    <!-- Benefits Section -->
+    <section class="benefits py-5">
         <div class="container">
-            <h2 class="text-center">About Our Job Portal</h2>
-            <p class="text-center mt-3 fs-5">
-                OpportuNest is designed to connect talented job seekers with top employers worldwide. Whether you're 
-                looking for full-time positions, freelance opportunities, or internships, our platform offers a wide 
-                variety of job listings across industries. With powerful search tools and a user-friendly interface, 
-                finding your dream job has never been easier. Join us today and take the next step toward your career goals.
+            <h2 class="text-center mb-5">Why Choose OpportuNest?</h2>
+            <div class="row">
+                <!-- Benefit 1 -->
+                <div class="col-md-4 text-center mb-4">
+                    <i class="fas fa-briefcase fa-3x mb-3"></i>
+                    <h4>Diverse Job Listings</h4>
+                    <p>Access thousands of job opportunities across various industries and locations.</p>
+                </div>
+                <!-- Benefit 2 -->
+                <div class="col-md-4 text-center mb-4">
+                    <i class="fas fa-search fa-3x mb-3"></i>
+                    <h4>Advanced Search Tools</h4>
+                    <p>Utilize powerful search and filtering options to find jobs that match your skills.</p>
+                </div>
+                <!-- Benefit 3 -->
+                <div class="col-md-4 text-center mb-4">
+                    <i class="fas fa-user-friends fa-3x mb-3"></i>
+                    <h4>Connect with Top Employers</h4>
+                    <p>Engage directly with recruiters and companies looking for talent like you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Section -->
+    <section class="images py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Explore Your Future</h2>
+            <div class="row">
+                <!-- Image 1 -->
+                <div class="col-md-4 text-center mb-4">
+                    <img src="{% static 'images/opportunities.jpg' %}" alt="Job Listings" class="img-fluid rounded">
+                    <p class="mt-3">Discover thousands of jobs tailored to your expertise.</p>
+                </div>
+                <!-- Image 2 -->
+                <div class="col-md-4 text-center mb-4">
+                    <img src="{% static 'images/network.jpg' %}" alt="Employers" class="img-fluid rounded">
+                    <p class="mt-3">Network with top employers worldwide.</p>
+                </div>
+                <!-- Image 3 -->
+                <div class="col-md-4 text-center mb-4">
+                    <img src="{% static 'images/career.jpg' %}" alt="Growth" class="img-fluid rounded">
+                    <p class="mt-3">Find opportunities that fuel your career growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Average Rating Section -->
+    <section class="average-rating py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">What Our Users Say</h2>
+            <p class="lead">
+                Our average rating: 
+                <span class="badge bg-success fs-4">
+                    {{ average_rating|default:"No reviews yet" }}
+                </span>
             </p>
         </div>
     </section>
+
+
+    <section class="call-to-action text-center py-5 bg-primary text-white">
+        <div class="container">
+            <h2>Ready to Start Your Journey?</h2>
+            <a href="{% url 'job-list' %}" class="btn btn-light btn-lg mt-3">Browse Jobs Now</a>
+            <a href="{% url 'create-review' %}" class="btn btn-success btn-lg mt-3 ms-3">Leave a Review</a>
+        </div>
+    </section>
 {% endblock %}
+

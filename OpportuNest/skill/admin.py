@@ -5,7 +5,7 @@ from OpportuNest.skill.models import Skill
 
 
 @admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
+class SkillAdmin(ModelAdmin):
     list_display = [
         'name',
     ]

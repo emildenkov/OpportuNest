@@ -1,20 +1,14 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from OpportuNest.review.authentication import get_deleted_user
-
 
 class Review(models.Model):
-    company = models.ForeignKey(
-        to='accounts.Company',
-        on_delete=models.CASCADE,
-        related_name='company_reviews'
-    )
     reviewer = models.ForeignKey(
         to='accounts.AppUser',
-        on_delete= models.SET(get_deleted_user),
+        on_delete= models.CASCADE,
         related_name='reviews'
     )
+    feedback = models.TextField()
     rating = models.IntegerField(
         blank=False,
         null=False,
