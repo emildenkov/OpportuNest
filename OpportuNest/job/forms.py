@@ -19,9 +19,6 @@ class AddJobForm(forms.ModelForm):
             'requirements' : {
                 'required': 'Requirements are required',
             },
-            'company': {
-                'required': 'Company name is required',
-            },
             'location': {
                 'required': 'Location is required',
             }
