@@ -5,7 +5,7 @@ from OpportuNest.review.forms import CreateReviewForm
 from OpportuNest.review.models import Review
 
 
-class CreateReviewView(LoginRequiredMixin,CreateView):
+class CreateReviewView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = CreateReviewForm
     template_name = 'reviews/create-review.html'
