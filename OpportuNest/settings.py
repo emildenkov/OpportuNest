@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
 
-    'OpportuNest.common.apps.CommonConfig'
+    'OpportuNest.common.apps.CommonConfig',
+
+    'rest_framework',
 
 ]
 
@@ -151,7 +153,7 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 

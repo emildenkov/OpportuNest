@@ -2,9 +2,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
+from rest_framework.generics import ListAPIView
 
 from OpportuNest.job.forms import AddJobForm, EditJobForm, DeleteJobForm, SearchJobForm
 from OpportuNest.job.models import Job
+from OpportuNest.job.serializers import JobSerializer
 
 
 class JobListView(LoginRequiredMixin, ListView, FormView):
@@ -78,3 +80,8 @@ class DeleteJobView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def form_invalid(self, form):
         return self.form_valid(form)
+
+
+class JobListAPIView(ListAPIView):
+    queryset = Job.objects.all().order_by('-date_posted')
+    serializer_class = JobSerializer
