@@ -9,101 +9,102 @@
             border: 1px solid #ced4da;
             border-radius: 5px;
         }
-        
+
         form#search-form .btn {
             padding: 0.5rem 1rem;
         }
-        
+
         form#search-form {
             margin-bottom: 1rem;
         }
     </style>
     <div class="container mt-4">
-    {% if request.user.is_company or request.user.is_staff %}
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{% url 'add-job' %}" class="btn btn-success">
-                <i class="fas fa-plus me-1"></i> Add New Job
-            </a>
-        </div>
-    {% endif %}
-
-    <div class="mb-4">
-        <div class="text-center mb-4">
-            <h2 class="fw-bold">Available Jobs</h2>
-        </div>
-        <form method="get" action="" id="search-form" class="d-flex justify-content-center align-items-center">
-            <div class="form-group me-2" style="width: 60%;">
-                {{ form }}
+        {% if request.user.is_company or request.user.is_staff %}
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{% url 'add-job' %}" class="btn btn-success">
+                    <i class="fas fa-plus me-1"></i> Add New Job
+                </a>
             </div>
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-        <div class="list-group">
-            {% if job_list %}
-                {% for job in job_list %}
-                    <div class="list-group-item mb-3 p-4 shadow-sm">
-                        <h4>{{ job.title }}</h4>
-                        <p><strong>Requirements:</strong> {{ job.requirements|truncatechars:25 }}</p>
-                        <p><strong>Posted by:</strong> {{ company_name }}</p>
-                        <p><strong>Date Posted:</strong> {{ job.date_posted|date:"d M Y H:i" }}</p>
+        {% endif %}
 
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <a href="{% url 'job-details' job.pk %}" class="btn btn-primary">
-                                <i class="fas fa-info-circle me-1"></i> Details
-                            </a>
-                            {% if request.user.is_seeker %}
-                                <a href="{% url 'create-application' job.pk %}" class="btn btn-outline-primary">
-                                    <i class="fas fa-paper-plane me-1"></i> Apply
+        <div class="mb-4">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Available Jobs</h2>
+            </div>
+            <form method="get" action="" id="search-form" class="d-flex justify-content-center align-items-center">
+                <div class="form-group me-2" style="width: 60%;">
+                    {{ form }}
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <div class="list-group">
+                {% if job_list %}
+                    {% for job in job_list %}
+                        <div class="list-group-item mb-3 p-4 shadow-sm">
+                            <h4>{{ job.title }}</h4>
+                            <p><strong>Requirements:</strong> {{ job.requirements|truncatechars:25 }}</p>
+                            <p><strong>Posted by:</strong> {{ company_name }}</p>
+                            <p><strong>Date Posted:</strong> {{ job.date_posted|date:"d M Y H:i" }}</p>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="{% url 'job-details' job.pk %}" class="btn btn-primary">
+                                    <i class="fas fa-info-circle me-1"></i> Details
                                 </a>
-                            {% endif %}
+                                {% if request.user.is_seeker %}
+                                    <a href="{% url 'create-application' job.pk %}" class="btn btn-outline-primary">
+                                        <i class="fas fa-paper-plane me-1"></i> Apply
+                                    </a>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p class="text-muted">No jobs available at the moment.</p>
-            {% endif %}
-        </div>
-
-        <nav aria-label="Job Pagination" class="mt-4">
-            <ul class="pagination justify-content-center">
-                {% if job_list.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1">First</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ job_list.previous_page_number }}">Previous</a>
-                    </li>
+                    {% endfor %}
                 {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">First</span>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                    </li>
+                    <p class="text-muted">No jobs available at the moment.</p>
                 {% endif %}
+            </div>
 
-                <li class="page-item active">
-                    <span class="page-link">{{ job_list.number }} of {{ job_list.paginator.num_pages }}</span>
-                </li>
+            <nav aria-label="Job Pagination" class="mt-4">
+                {% if is_paginated %}
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">First</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                        {% endif %}
 
-                {% if job_list.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ job_list.next_page_number }}">Next</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ job_list.paginator.num_pages }}">Last</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">Next</span>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">Last</span>
-                    </li>
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        </li>
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">Last</span>
+                            </li>
+                        {% endif %}
+                    </ul>
                 {% endif %}
-            </ul>
-        </nav>
-    </div>
+            </nav>
 
 {% endblock %}
