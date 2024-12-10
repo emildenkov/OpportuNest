@@ -13,6 +13,7 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         review = form.save(commit=False)
+
         review.reviewer = self.request.user
 
         return super().form_valid(form)

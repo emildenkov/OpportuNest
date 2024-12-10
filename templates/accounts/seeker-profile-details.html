@@ -2,79 +2,84 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <!-- Seeker Profile Card -->
-    <div class="card mx-auto shadow-lg" style="max-width: 50%;">
-        <div class="card-header text-center bg-primary text-white">
-            <h2>Seeker Profile</h2>
-        </div>
-        <div class="card-body">
-            {% if profile.profile_picture %}
-                <div class="text-center mb-4">
-                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 150px;">
-                </div>
-            {% else %}
-                <div class="text-center mb-4">
-                    <img src="{% static 'images/default_profile_picture.png' %}" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 150px;">
-                </div>
-            {% endif %}
-        
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <strong>Full Name:</strong> {{ profile.full_name|default:"Not available" }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Date of Birth:</strong> {{ profile.date_of_birth|default:"Not provided" }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Skills:</strong>
-                    {% if profile.skills.exists %}
-                        <ul class="mb-0">
-                            {% for skill in profile.skills.all %}
-                                <li>{{ skill.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p class="mb-0">No skills listed.</p>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-        <div class="card-footer text-center">
-            <a href="{% url 'edit-seeker' request.user.pk %}" class="btn btn-success me-2">
-                <i class="fas fa-edit me-1"></i> Edit
-            </a>
-            <a href="{% url 'delete-seeker' request.user.pk %}" class="btn btn-danger">
-                <i class="fas fa-trash-alt me-1"></i> Delete
-            </a>
-        </div>
-    </div>
+    <div class="container mt-5">
+        <!-- Seeker Profile Card -->
+        <div class="card mx-auto shadow-lg" style="max-width: 50%;">
+            <div class="card-header text-center bg-primary text-white">
+                <h2>Seeker Profile</h2>
+            </div>
+            <div class="card-body">
+                {% if profile.profile_picture %}
+                    <div class="text-center mb-4">
+                        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture"
+                             class="img-fluid rounded-circle" style="max-width: 150px;">
+                    </div>
+                {% else %}
+                    <div class="text-center mb-4">
+                        <img src="{% static 'images/default_profile_picture.png' %}" alt="Profile Picture"
+                             class="img-fluid rounded-circle" style="max-width: 150px;">
+                    </div>
+                {% endif %}
 
-    <div class="mt-5">
-        <h3 class="text-center">My Applications</h3>
-        {% if applications %}
-            <div class="row">
-                {% for application in applications %}
-                    <div class="col-md-6 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ application.job.title }}</h5>
-                                <p class="text-muted mb-2">Company: {{ application.job.posted_by.company.company_name }}</p>
-                                <p class="text-muted mb-2">Date Applied: {{ application.date_applied|date:"d M Y" }}</p>
-                                <p>Status: <strong>{{ application.status|default:"Pending" }}</strong></p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="{% url 'details-application' application.pk %}" class="btn btn-info btn-sm">
-                                        <i class="fas fa-eye me-1"></i> View
-                                    </a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Full Name:</strong> {{ profile.full_name|default:"Not available" }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Date of Birth:</strong> {{ profile.date_of_birth|default:"Not provided" }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Skills:</strong>
+                        {% if profile.skills.exists %}
+                            <ul class="mb-0">
+                                {% for skill in profile.skills.all %}
+                                    <li>{{ skill.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="mb-0">No skills listed.</p>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'edit-seeker' request.user.pk %}" class="btn btn-success me-2">
+                    <i class="fas fa-edit me-1"></i> Edit
+                </a>
+                <a href="{% url 'delete-seeker' request.user.pk %}" class="btn btn-danger">
+                    <i class="fas fa-trash-alt me-1"></i> Delete
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3 class="text-center">My Applications</h3>
+            {% if applications %}
+                <div class="row">
+                    {% for application in applications %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ application.job.title }}</h5>
+                                    <p class="text-muted mb-2">
+                                        Company: {{ application.job.posted_by.company.company_name }}</p>
+                                    <p class="text-muted mb-2">Date
+                                        Applied: {{ application.date_applied|date:"d M Y" }}</p>
+                                    <p>Status: <strong>{{ application.status|default:"Pending" }}</strong></p>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{% url 'details-application' application.pk %}"
+                                           class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye me-1"></i> View
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p class="text-center text-muted">You have not made any applications yet.</p>
-        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center text-muted">You have not made any applications yet.</p>
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endblock %}

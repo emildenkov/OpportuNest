@@ -7,6 +7,7 @@ from django.conf import settings
 def send_welcome_email(recipient_email):
     subject = "Welcome to OpportuNest!"
     message = "Thank you for choosing us. We're excited to have you onboard!"
+
     send_mail(
         subject,
         message,

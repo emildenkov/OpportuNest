@@ -2,53 +2,53 @@
 {% load add_class %}
 
 {% block content %}
-<div class="container mt-5 d-flex justify-content-center">
-    <div class="card w-50 shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Log In to OpportuNest</h4>
-        </div>
-        <div class="card-body">
-            <form method="post" novalidate class="needs-validation">
-                {% csrf_token %}
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card w-50 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Log In to OpportuNest</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate class="needs-validation">
+                    {% csrf_token %}
 
-                <!-- Form-level errors -->
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        {{ form.non_field_errors }}
+                    <!-- Form-level errors -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <!-- Username Field -->
+                    <div class="mb-3">
+                        {{ form.username.label_tag }}
+                        {{ form.username|add_class:"form-control" }}
+                        {% if form.username.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.username.errors.0 }}
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
 
-                <!-- Username Field -->
-                <div class="mb-3">
-                    {{ form.username.label_tag }}
-                    {{ form.username|add_class:"form-control" }}
-                    {% if form.username.errors %}
-                        <div class="invalid-feedback d-block">
-                            {{ form.username.errors.0 }}
-                        </div>
-                    {% endif %}
-                </div>
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        {{ form.password.label_tag }}
+                        {{ form.password|add_class:"form-control" }}
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.password.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
 
-                <!-- Password Field -->
-                <div class="mb-3">
-                    {{ form.password.label_tag }}
-                    {{ form.password|add_class:"form-control" }}
-                    {% if form.password.errors %}
-                        <div class="invalid-feedback d-block">
-                            {{ form.password.errors.0 }}
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary w-100">
-                    <i class="fas fa-sign-in-alt me-1"></i> Log in
-                </button>
-            </form>
-        </div>
-        <div class="card-footer text-center">
-            <p class="mb-0">Don't have an account? <a href="{% url 'account-select-type' %}">Register</a></p>
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-sign-in-alt me-1"></i> Log in
+                    </button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p class="mb-0">Don't have an account? <a href="{% url 'account-select-type' %}">Register</a></p>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

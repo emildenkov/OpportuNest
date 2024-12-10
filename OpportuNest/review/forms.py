@@ -15,6 +15,7 @@ class CreateReviewForm(ReviewBaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.fields['rating'].help_text = 'Rate us from 1 to 5 based on your experience.'
         self.fields['rating'].widget = forms.Select(
             choices=[
@@ -30,6 +31,7 @@ class CreateReviewForm(ReviewBaseForm):
 
     def clean_rating(self):
         rating = self.cleaned_data.get('rating')
+
         if not rating or rating == '':
             raise forms.ValidationError('Please select a valid rating.')
         return rating

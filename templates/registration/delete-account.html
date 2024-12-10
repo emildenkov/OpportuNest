@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
-        <div class="card-body text-center">
-            <h1 class="mb-4 text-danger">Confirm Profile Deletion</h1>
-            <p class="lead">
-                You are about to delete your profile. <strong>This action cannot be undone.</strong><br>
-                Are you sure you want to proceed?
-            </p>
-            <div class="d-flex justify-content-center mt-4">
-                <form method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger btn-lg me-3">
-                        <i class="fas fa-trash-alt me-1"></i> Yes, Delete
-                    </button>
-                    <a href="{% url 'profile-details' request.user.pk %}" class="btn btn-secondary btn-lg">
-                        <i class="fas fa-times me-1"></i> Cancel
-                    </a>
-                </form>
+    <div class="container mt-5">
+        <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+            <div class="card-body text-center">
+                <h1 class="mb-4 text-danger">Confirm Profile Deletion</h1>
+                <p class="lead">
+                    You are about to delete your profile. <strong>This action cannot be undone.</strong><br>
+                    Are you sure you want to proceed?
+                </p>
+                <div class="d-flex justify-content-center mt-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg me-3">
+                            <i class="fas fa-trash-alt me-1"></i> Yes, Delete
+                        </button>
+                        <a href="{% url 'profile-details' request.user.pk %}" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-times me-1"></i> Cancel
+                        </a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

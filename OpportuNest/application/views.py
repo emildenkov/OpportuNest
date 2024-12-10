@@ -53,9 +53,11 @@ class DetailApplicationView(LoginRequiredMixin, DetailView):
 @user_passes_test(lambda user: user.is_company)
 def accept_application(request, pk):
     application = get_object_or_404(Application, pk=pk)
+
     if application.job.posted_by == request.user:
         application.status = 'Accepted'
         application.save()
+
         return redirect('profile-details', pk=request.user.pk)
 
 
@@ -63,9 +65,11 @@ def accept_application(request, pk):
 @user_passes_test(lambda user: user.is_company)
 def reject_application(request, pk):
     application = get_object_or_404(Application, pk=pk)
+
     if application.job.posted_by == request.user:
         application.status = 'Rejected'
         application.save()
+
         return redirect('profile-details', pk=request.user.pk)
 
 

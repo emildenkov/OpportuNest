@@ -108,15 +108,19 @@ class EditSeekerView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy(
             'profile-details',
-            kwargs={'pk': self.object.pk}
+            kwargs={
+                'pk': self.object.pk
+            }
         )
 
     def get_object(self, queryset=None):
         user_id = self.kwargs.get('pk')
+
         return Seeker.objects.get(user_id=user_id)
 
     def form_valid(self, form):
         form.save()
+
         return super().form_valid(form)
 
 
@@ -128,11 +132,14 @@ class EditCompanyView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy(
             'profile-details',
-            kwargs={'pk': self.object.pk}
+            kwargs={
+                'pk': self.object.pk
+            }
         )
 
     def get_object(self, queryset=None):
         user_id = self.kwargs.get('pk')
+
         return Company.objects.get(user_id=user_id)
 
 @login_required

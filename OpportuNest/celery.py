@@ -4,9 +4,11 @@ from celery import Celery
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'OpportuNest.settings')
+
 app = Celery('OpportuNest')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
+
 broker_connection_retry_on_startup = True
 
 

@@ -8,7 +8,9 @@ class Review(models.Model):
         on_delete= models.CASCADE,
         related_name='reviews'
     )
+
     feedback = models.TextField()
+
     rating = models.IntegerField(
         blank=False,
         null=False,
@@ -18,6 +20,7 @@ class Review(models.Model):
         ],
         default=0
     )
+
     date_posted = models.DateTimeField(
         auto_now_add=True,
     )

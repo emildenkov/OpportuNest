@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'OpportuNest.common.apps.CommonConfig',
     'OpportuNest.accounts.apps.AccountsConfig',
     'OpportuNest.job.apps.JobConfig',
     'OpportuNest.application.apps.ApplicationConfig',
@@ -41,8 +42,6 @@ INSTALLED_APPS = [
 
     'cloudinary',
     'cloudinary_storage',
-
-    'OpportuNest.common.apps.CommonConfig',
 
     'rest_framework',
 
@@ -151,6 +150,7 @@ cloudinary.config(
 
 MEDIA_URL = 'media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'

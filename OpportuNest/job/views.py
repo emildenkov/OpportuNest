@@ -20,6 +20,7 @@ class JobListView(LoginRequiredMixin, ListView, FormView):
         queryset = self.model.objects.select_related('posted_by__company')
 
         query = self.request.GET.get('query', None)
+
         if query:
             queryset = queryset.filter(title__icontains=query)
 
@@ -34,6 +35,7 @@ class AddJobView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         job = form.save(commit=False)
+
         job.posted_by = self.request.user
 
         return super().form_valid(form)
@@ -54,6 +56,7 @@ class EditJobView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
 
     def test_func(self):
         job = get_object_or_404(Job, pk=self.kwargs['pk'])
+
         return self.request.user == job.posted_by
 
     def get_success_url(self):
@@ -62,7 +65,7 @@ class EditJobView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
             kwargs={
                 'pk': self.kwargs['pk']
             }
-        )
+)
 
 
 class DeleteJobView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
