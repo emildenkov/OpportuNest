@@ -158,7 +158,7 @@ LOGOUT_REDIRECT_URL = 'index'
 CELERY_BROKER_URL= config('CELERY_BROKER_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-CELERYD_POOL = 'solo'
+CELERYD_POOL = config('CELERYD_POOL')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
