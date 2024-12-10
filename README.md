@@ -1,8 +1,8 @@
 # OpportuNest
 
-## Deployed: opportunest-ffh3cuh7cyhyhhbh.italynorth-01.azurewebsites.net
+### Deployed: opportunest-ffh3cuh7cyhyhhbh.italynorth-01.azurewebsites.net
 
-## Overview
+### Overview
 
 OpportuNest is Django Web Application, which connects employers and employees all over the world. The job-seekers can browse through different job offers and apply for the job, which they like. Companies can publish on the platform if they have open postions and approve or reject applications from the job-seekers. 
 
@@ -12,7 +12,7 @@ OpportuNest is Django Web Application, which connects employers and employees al
    
 2. Clone the repository:
    ```sh
-   git clone 
+   git clone https://github.com/emildenkov/OpportuNest.git
    ```
 
 3. Create venv and install the requirements:
@@ -23,7 +23,7 @@ OpportuNest is Django Web Application, which connects employers and employees al
 4. Check the .env.template file for the needed credentials
    - If you use MacOS or Linux you don't need the `CELERYD_POOL`. For Windows it should be setted to `solo`
 
-5. Run the Celery worker in separated terminal:
+5. Run the Celery worker in separate terminal:
    - Command for Windows:
      ```sh
      celery -A OpportuNest worker --pool=solo
@@ -46,3 +46,6 @@ OpportuNest is Django Web Application, which connects employers and employees al
    - **Regular users**:
       - **Email:** denkov_it@gmail.com; **password:** 12company34
       - **Email:** georgigeorgiev2@gmail.com; **password:** 12seeker34
+
+## How OpportuNest works:
+-
