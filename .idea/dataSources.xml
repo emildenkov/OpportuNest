@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Postgers Azure" uuid="4bfd09b9-ce6c-4b03-ad70-6748872e04ea">
+    <data-source source="LOCAL" name="postgres_azure" uuid="b7baf42f-bc1c-440c-bb12-8122735e9eb1">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://pprtunest.postgres.database.azure.com:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://opprtunest.postgres.database.azure.com:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
