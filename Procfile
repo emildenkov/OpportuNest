@@ -1,2 +1,2 @@
-web: gunicorn Opportunest.wsgi
-celery: celery -A Opportunest worker --loglevel=info
+web: gunicorn OpportuNest.wsgi
+celery: celery -A OpportuNest worker --loglevel=info
