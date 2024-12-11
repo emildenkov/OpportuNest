@@ -21,7 +21,7 @@
             <hr>
 
             <div class="d-flex justify-content-between">
-                {% if request.user.is_company or request.user.is_staff %}
+                {% if request.user.pk == job.posted_by.pk %}
                     <a href="{% url 'edit-job' job.pk %}" class="btn btn-warning">
                         <i class="fas fa-edit me-1"></i> Edit
                     </a>
