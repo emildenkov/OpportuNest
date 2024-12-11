@@ -87,6 +87,11 @@ class SeekerEditForm(forms.ModelForm):
         required=False,
     )
 
+    date_of_birth = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        required=False,
+    )
+
     class Meta:
         model = Seeker
         fields = ['first_name', 'last_name', 'profile_picture', 'date_of_birth', 'skills']
