@@ -51,7 +51,7 @@
 OpportuNest is a Django-based web application designed to connect employers with employees efficiently. Below is an overview of how the platform operates:
 
 ### Home Page and Account Registration
-- When you open the application, you'll be greeted by the home page, which includes buttons for `Log In` and `Register`.
+- When you open the application, you'll be greeted by the home page, which includes button for `Log In`.
 - Clicking on `Log In` redirects you to the login page. If you don’t have an account, click `Register` at the bottom of the login form. 
 - During registration, you will select your desired account type (Company or Seeker). This choice will determine the registration form you complete.
 - After successful registration, you’ll receive a welcome email and can start using the app.
