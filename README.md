@@ -44,7 +44,7 @@ OpportuNest is Django Web Application, which connects employers and employees al
    - **Seeker staff user**:
       - **Email:** staff_seeker@gmail.com; **password:** 12staff34
    - **Regular users**:
-      - **Email:** denkov_it@gmail.com; **password:** 12company34
+      - **Email:** test_it_company@gmail.com; **password:** 12company34
       - **Email:** georgigeorgiev2@gmail.com; **password:** 12seeker34
 
 ## How OpportuNest works:
