@@ -52,8 +52,8 @@ OpportuNest is Django Web Application, which connects employers and employees al
 - When you open the application you will see the home page and button for `Log in` and you will be redirected to the logging page. If you don't have an account you should click on `Register`, which is in the bottom of the form. Then you will   see a form in which you will have to select the desired type of account that you want and this will lead you to the registration form for your account type.
 - After registration you will recieve a welcome email and be able to operate in the app.
 - Companies:
-   - If you chose a company account, you will be able to edit and delete your profile, post jobs, review applications and based on your oppinion you will decide if you want to `Accept` or `Reject` the applicant. You have the permission            to rate the app also.
+      - If you chose a company account, you will be able to edit and delete your profile, post jobs, review applications and based on your oppinion you will decide if you want to `Accept` or `Reject` the applicant. You have the permission            to rate the app also.
 -Seekers:
-   - If you chose a seeker account, you will be able to edit and delete your profile as you can select the skills, which you posses. You will be able to apply for jobs and see if you are `Accepted` or `Rejected` from your profile page and         you also have the permission to rate the app
+      - If you chose a seeker account, you will be able to edit and delete your profile as you can select the skills, which you posses. You will be able to apply for jobs and see if you are `Accepted` or `Rejected` from your profile page and         you also have the permission to rate the app
 - REST endpoint:
-   - There is a REST endpoint which serves all jobs, that have been posted.
+      - There is a REST endpoint which serves all jobs, that have been posted.
